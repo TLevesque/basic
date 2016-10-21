@@ -1,13 +1,58 @@
 <body>
+
   <header>
-    <h1>My LikeBook</h1>
+    <div class="row">
+      <div class="col-md-12 text-center">
+          <h1>My LikeBook</h1>
+          <!-- {{> addLike}} -->
+      </div>
+    </div>
   </header>
+
   <main>
-  <ul>
-    {{#each likes}}
-      <li>{{text}}</li>
-    {{/each}}
-  </ul>
+    <div class="row" style="margin-top:25px">
+      <div class="col-md-6 col-md-offset-3">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>URL</th>
+              <th>Facebook ID</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each likes}}
+            <tr>
+              <th>{{text}}</th>
+              <th>{{text}}</th>
+              <th>{{text}}</th>
+            </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      </div>
+    </div>
     <!-- <button class='test'>Click Me</button> -->
+    <!-- <div class="row" style="margin-top:20px">
+      <div class="col-md-12 text-center">
+      {{> addLike}}
+      </div>
+    </div> -->
   </main>
+
 </body>
+
+<!-- <template name="addLike">
+  <h3>Add a new Like</h3>
+  <form class="form-inline">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" class="form-control" id="name" placeholder="Enter Like's name">
+    </div>
+    <div class="form-group">
+      <label for="likeUrl">URL</label>
+      <input type="text" class="form-control" id="likeUrl" placeholder="Enter Like's URL">
+    </div>
+    <button class="btn btn-default">Add</button>
+  </form>
+</template> -->
