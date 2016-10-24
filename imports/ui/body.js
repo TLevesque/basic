@@ -8,23 +8,29 @@ import './body.html';
 
 Template.body.helpers({
   likesList: function () {
-    return LikesVar.find();
-  }
+    return LikesVar.find({}, { sort: { likeDate: -1 } });
+  },
 });
 
 Template.body.events({
   'submit .likeForm': function (event) {
-    var likeName = event.target.likeName.value;
-    var likeUrl = event.target.likeUrl.value;
+    const likeName = event.target.likeName.value;
+    const likeUrl = event.target.likeUrl.value;
 
     LikesVar.insert({
       likeName: likeName,
       likeUrl: likeUrl,
-      likeDate: new Date()
+      likeDate: new Date(),
     });
     event.target.likeName.value = '';
     event.target.likeUrl.value = '';
 
     return false;
-  }
+  },
+});
+
+Template.likeTemplate.events({
+  'click .deleteLike'() {
+    LikesVar.remove(this._id);
+  },
 });
