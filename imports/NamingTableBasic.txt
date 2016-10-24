@@ -1,0 +1,12 @@
+  = Naming Table for LikeBook =
+
+newItemsFormClassName : likeForm
+item1ContentName: likeName
+item2ContentName: likeUrl
+inputType (submit): submit
+elements (items): likesList
+itemTemplateName: likeTemplate
+itemsDbVariableName: LikesVar
+itemsCollectionName: likes
+keyNameItem1: likeName
+keyNameItem2: likeUrl

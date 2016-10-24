@@ -2,5 +2,5 @@
 
 import { Mongo } from 'meteor/mongo';
 
-const Likes = new Mongo.Collection('likes');
-export default Likes;
+const LikesVar = new Mongo.Collection('likes');
+export default LikesVar;

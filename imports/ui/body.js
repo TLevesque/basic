@@ -1,34 +1,30 @@
 // JS BODY IMPORTS UI
 
-import {Template} from 'meteor/templating';
+import { Template } from 'meteor/templating';
 
-import Likes from '../api/likes.js';
+import LikesVar from '../api/likes.js';
 
 import './body.html';
 
 Template.body.helpers({
-  likes() {
-    return Likes.find({});
+  likesList: function () {
+    return LikesVar.find();
   }
 });
 
 Template.body.events({
-  'click .test'(event) {
-    console.log('hello');
+  'submit .likeForm': function (event) {
+    var likeName = event.target.likeName.value;
+    var likeUrl = event.target.likeUrl.value;
+
+    LikesVar.insert({
+      likeName: likeName,
+      likeUrl: likeUrl,
+      likeDate: new Date()
+    });
+    event.target.likeName.value = '';
+    event.target.likeUrl.value = '';
+
+    return false;
   }
 });
-
-// Template.addLike.events({
-//   'click.btn': function (event) {
-//     event.preventDefault();
-//     var name = $('#name').val();
-//     // var likeUrl = $('#likeUrl').val();
-//
-//     newLike = Likes.insert({ name: name, createdAt: Date.now() },
-//     function (error, result) {
-//       if (result) {
-//         console.log(result);
-//       }
-//     });
-//   }
-// });

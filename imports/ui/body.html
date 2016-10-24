@@ -1,12 +1,11 @@
 <body>
-
   <header>
-    <div class="row">
-      <div class="col-md-12 text-center">
-          <h1>My LikeBook</h1>
-          <!-- {{> addLike}} -->
-      </div>
-    </div>
+    <h1>My LikeBook</h1>
+    <form class="likeForm">
+      <input type="text" name="likeName" placeholder="Enter Like's Name">
+      <input type="text" name="likeUrl" placeholder="Enter Like's URL">
+      <input type="submit" value="Submit">
+    </form>
   </header>
 
   <main>
@@ -17,42 +16,26 @@
             <tr>
               <th>Name</th>
               <th>URL</th>
-              <th>Facebook ID</th>
+              <th>Date</th>
             </tr>
           </thead>
-          <tbody>
-            {{#each likes}}
-            <tr>
-              <th>{{text}}</th>
-              <th>{{text}}</th>
-              <th>{{text}}</th>
-            </tr>
+            {{#each likesList}}
+              {{> likeTemplate}}
             {{/each}}
-          </tbody>
         </table>
       </div>
     </div>
-    <!-- <button class='test'>Click Me</button> -->
-    <!-- <div class="row" style="margin-top:20px">
-      <div class="col-md-12 text-center">
-      {{> addLike}}
-      </div>
-    </div> -->
   </main>
 
 </body>
 
-<!-- <template name="addLike">
-  <h3>Add a new Like</h3>
-  <form class="form-inline">
-    <div class="form-group">
-      <label for="name">Name</label>
-      <input type="text" class="form-control" id="name" placeholder="Enter Like's name">
-    </div>
-    <div class="form-group">
-      <label for="likeUrl">URL</label>
-      <input type="text" class="form-control" id="likeUrl" placeholder="Enter Like's URL">
-    </div>
-    <button class="btn btn-default">Add</button>
-  </form>
-</template> -->
+
+<template name="likeTemplate">
+  <tbody>
+      <tr>
+        <th>{{likeName}}</th>
+        <th>{{likeUrl}}</th>
+        <th>{{likeDate}}</th>
+      </tr>
+  </tbody>
+</template>
