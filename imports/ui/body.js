@@ -3,6 +3,7 @@
 import { Template } from 'meteor/templating';
 
 import LikesVar from '../api/likes.js';
+// import '../imports/ui/jquery.js';
 
 import './body.html';
 
@@ -32,5 +33,11 @@ Template.body.events({
 Template.likeTemplate.events({
   'click .deleteLike'() {
     LikesVar.remove(this._id);
+  },
+});
+
+Template.likeTemplate.events({
+  'click .modifyLike'() {
+    LikesVar.update(this._id);
   },
 });

@@ -3,6 +3,7 @@
 newItemsFormClassName : likeForm
 item1ContentName: likeName
 item2ContentName: likeUrl
+item2ContentName: likeId
 inputType (submit): submit
 elements (items): likesList
 itemTemplateName: likeTemplate
@@ -10,3 +11,20 @@ itemsDbVariableName: LikesVar
 itemsCollectionName: likes
 keyNameItem1: likeName
 keyNameItem2: likeUrl
+
+
+
+'click .deleteAllLikes': function(event) {
+  LikesVar.remove({});
+  }
+
+
+#deleteLike
+<button id="deleteLike" class="deleteLike">Remove</button>
+//*[@id="deleteLike"]
+
+<script>
+  $(document).ready(function () {
+    $('#toto').hide();
+  });
+</script>
