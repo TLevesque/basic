@@ -1,0 +1,61 @@
+PROBLEMS :
+  - Nav Responsive for S and M Screens : Side buttons disappear
+  - Space between NavBar and SearchBar to delete
+
+
+TO DO LIST:
+  - Button Update to do & Connect
+  - Search Bar with autocomplete : http://materializecss.com/forms.html#autocomplete
+  - User ID Facebook Connect
+  - Likes imports: Basic info
+  - Setup FB Webhook subscription to push auto update
+  - Select FB infos from the graph
+  - Update Form
+  - Update Collection Card
+  - Likes Map Display
+  - User DB with info to stock
+  - FB Events to import for each like entity
+  - Activities BCN DB
+  - Enrich DB from external data gmap, ...
+
+
+WORK IN PROGRESS:
+
+  - CARD DRAFTS :
+
+    POP UP ACCORDEON : https://www.tutorialspoint.com/materialize/materialize_collapsible.htm
+          <ul class="collapsible popout" data-collapsible="accordion">
+             <li>
+                <div class="collapsible-header"><i class="material-icons">filter_drama</i>First Section</div>
+                <div class="collapsible-body"><p>This is first section.</p></div>
+             </li>
+          </ul>
+
+    Collection Avatar Content : http://materializecss.com/collections.html#!
+          <ul class="collection">
+            <li class="collection-item avatar">
+              <img src="images/yuna.jpg" alt="" class="circle">
+              <span class="title">Title</span>
+              <p>First Line <br>
+                 Second Line
+              </p>
+              <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+            </li>
+
+    HORIZONTAL CARD : http://materializecss.com/cards.html
+            <div class="col s12 m7">
+              <h2 class="header">Horizontal Card</h2>
+              <div class="card horizontal">
+                <div class="card-image">
+                  <img src="http://lorempixel.com/100/190/nature/6">
+                </div>
+                <div class="card-stacked">
+                  <div class="card-content">
+                    <p>I am a very simple card. I am good at containing small bits of information.</p>
+                  </div>
+                  <div class="card-action">
+                    <a href="#">This is a link</a>
+                  </div>
+                </div>
+              </div>
+            </div>
