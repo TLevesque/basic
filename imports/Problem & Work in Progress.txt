@@ -1,9 +1,13 @@
 PROBLEMS :
   - Nav Responsive for S and M Screens : Side buttons disappear
   - Space between NavBar and SearchBar to delete
+  - Modal Cancel button : empty fields
+  - Modal Submit button disable on field unvalide type
+  - NavBar fixed when scroll
 
 
 TO DO LIST:
+  - Remove all likes button
   - Button Update to do & Connect
   - Search Bar with autocomplete : http://materializecss.com/forms.html#autocomplete
   - User ID Facebook Connect

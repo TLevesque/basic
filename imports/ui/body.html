@@ -6,9 +6,10 @@
     <!-- ADD A LIKE BUTTON TRIGGER MODAL WINDOW FORM -->
       <ul class="left hide-on-med-and-down">
         <li>
-          <a class="modal-trigger" href="#modal1"><i class="material-icons left">add</i>Add New Like</a>
+          <a class="modal-trigger" href="#modalNewLike"><i class="material-icons left">add</i>Add New Like</a>
         </li>
       </ul>
+
     <!-- LOGO -->
       <a href="#!" class="brand-logo center">LikeBook</a>
     <!-- USER CONNECT BUTTON -->
@@ -17,14 +18,15 @@
       </ul>
     </div>
   </nav>
+  {{> newLikeTemplate}}
 
 <!-- SEARCH BAR & RESULTS DIV-->
   <div class="nav-wrapper">
     <div class="search search-wrapper z-depth-2">
       <form>
         <div class="input-field">
-          <input id="search" type="search" required>
-          <label for="search"><i class="material-icons">search</i></label>
+          <input class="searchbox" id="searchbox" type="search" required>
+          <label for="searchbox"><i class="material-icons">search</i></label>
           <i class="material-icons">close</i>
           <!-- <div class="search-results"></div> -->
         </div>
@@ -32,29 +34,131 @@
     </div>
   </div>
 
-<!-- ADD NEW LIKE FORM MODAL WINDOW -->
-  <div class="container">
-    <div id="modal1" class="modal bottom-sheet">
-      <div class="modal-content">
-        <div class="container">
-          <div class="row">
-            <form class="likeForm">
-              <div class="col s12">
+<!-- LIKES COUNTER -->
+  <!-- {{> likesCounterTemplate}} -->
+
+<!-- LIKES LIST -->
+  <main>
+    <div class="container">
+      <ul class="collection collapsible popout" data-collapsible="accordion">
+        {{#each likesList}}
+          {{> likeTemplate}}
+          {{> updateLikeTemplate}}
+        {{/each}}
+      </ul>
+    </div>
+  </main>
+
+  <script>
+    $(document).ready(function () {
+      $('.modal-trigger').leanModal();
+    });
+  </script>
+
+</body>
+
+<!-- <template name="likesCounterTemplate">
+  <h5 class="center">You have {{likesNumber}} likes! ;)</h5>
+</template> -->
+
+<template name="likeTemplate">
+  <li>
+    <!-- Small View Like Collection -->
+     <div class="collapsible-header">
+        <div class="valign-wrapper">
+          <i class="material-icons">account_circle</i><h5>{{likeName}}</h5>
+        </div>
+        <!-- Modal Like Update Button -->
+        <button data-target="modalUpdateLike" class="editLike btn modal-trigger modifyLike waves-effect waves-light blue btn-floating"><i class="material-icons">edit</i>Modify</button>
+          <script>
+            $(document).ready(function () {
+              $('.modal-trigger').leanModal();
+            });
+          </script>
+        <!-- Delete Like Button -->
+        <button class="deleteLike waves-effect waves-light red btn-floating"><i class="material-icons">delete</i>Remove</button>
+      </div>
+      <!-- Full View Like Collection -->
+     <div class="collapsible-body">
+       <h6>{{likeUrl}}</h6>
+       <h6>{{likeDate}}</h6>
+     </div>
+  </li>
+</template>
+
+<template name="newLikeTemplate">
+  <!-- ADD NEW LIKE FORM MODAL WINDOW -->
+    <div class="container">
+      <div id="modalNewLike" class="modal">
+        <div class="modal-content">
+          <h5 class="center-align">Add a New Like:</h5>
+          <div class="container">
+            <div class="row">
+              <!-- ADD NEW LIKE FORM MODAL -->
+              <form class="newLikeForm">
+                <!-- NEW LIKENAME -->
                 <div class="input-field">
                   <i class="material-icons prefix">thumb_up</i>
-                  <input type="text" name="likeName" placeholder="Enter Like's Name" required>
-                  <label for="likeName">Like Name</label>
+                  <input type="text" name="newlikeName" placeholder="Enter Like's Name" required>
+                  <label for="likeName">Like Name :</label>
                 </div>
+                <!-- NEW LIKEURL -->
                 <div class="input-field">
                   <i class="material-icons prefix">link</i>
-                  <input type="text" name="likeUrl" placeholder="Enter Like's URL">
-                  <label for="likeName">URL Link</label>
+                  <input type="url" name="newlikeUrl" placeholder="Enter Like's URL">
+                  <label for="likeUrl">URL Link :</label>
                 </div>
+                <!-- MODAL NEW LIKE FORM BUTTONS -->
                 <div class="modal-footer">
+                  <!-- SUBMIT NEW LIKE FORM BUTTON -->
                   <button style="margin: 10px" class="btn modal-action modal-close waves-effect waves-light blue" type="submit" name="action">Submit
                     <i class="large material-icons left">done</i>
                   </button>
+                  <!-- CANCEL NEW LIKE FORM BUTTON -->
                   <button style="margin: 10px" class="btn modal-action modal-close waves-effect waves-light red right">Cancel
+                    <i class="large material-icons left">cancel</i>
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</template>
+
+
+<template name="updateLikeTemplate">
+  <!-- Modal Like Update Window -->
+  <div class="container">
+    <div id="modalUpdateLike" class="modal">
+      <div class="modal-content">
+        <div class="container">
+          <div class="row">
+            <h5 class="center-align">Update your Like:</h5>
+            <form class="likeEditForm">
+              <div class="col s12">
+
+                <!-- LikeName Field -->
+                <div class="input-field" style="margin:10px">
+                  <i class="material-icons prefix">thumb_up</i>
+                  <input value="" id="likeName" type="text" name="likeEditName" placeholder="Enter Like's Name" required>
+                  <label class="active" for="likeName">Like Name :</label>
+                </div>
+                <!-- LikeUrl Field-->
+                <div class="input-field" style="margin:10px">
+                  <i class="material-icons prefix">link</i>
+                  <input value="" type="text" name="likeEditUrl" placeholder="Enter Like's URL">
+                  <label class="active" for="likeUrl">URL Link :</label>
+                </div>
+                <!-- Modal Like Update Buttons -->
+                <div class="modal-footer">
+                  <!-- Submit Button -->
+                  <button style="margin: 10px" class="btn modal-action modal-close waves-effect waves-light blue" type="submit" name="action">Submit
+                    <i class="large material-icons left">done</i>
+                  </button>
+                  <!-- Cancel Button -->
+                  <button style="margin: 10px" class="cancel btn modal-action modal-close waves-effect waves-light red right">Cancel
                     <i class="large material-icons left">cancel</i>
                   </button>
                 </div>
@@ -65,40 +169,4 @@
       </div>
     </div>
   </div>
-
-<!-- LIKES LIST -->
-  <main>
-    <div class="container">
-      <ul class="collection collapsible popout" data-collapsible="accordion">
-        {{#each likesList}}
-          {{> likeTemplate}}
-        {{/each}}
-      </ul>
-    </div>
-  </main>
-
-  <script>
-  $(document).ready(function () {
-    $('.modal-trigger').leanModal();
-  });
-  </script>
-
-</body>
-
-
-<template name="likeTemplate">
-  <li>
-     <div class="collapsible-header">
-        <div class="valign-wrapper">
-          <i class="material-icons">account_circle</i><h5>{{likeName}}</h5>
-        </div>
-        <button data-target="modal1" class="btn modal-trigger modifyLike waves-effect waves-light blue btn-floating"><i class="material-icons">edit</i>Modify</button>
-        <button class="deleteLike waves-effect waves-light red btn-floating"><i class="material-icons">delete</i>Remove</button>
-      </div>
-
-     <div class="collapsible-body">
-       <h6>{{likeUrl}}</h6>
-       <h6>{{likeDate}}</h6>
-     </div>
-  </li>
 </template>
