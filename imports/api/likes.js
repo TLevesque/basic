@@ -4,3 +4,5 @@ import { Mongo } from 'meteor/mongo';
 
 const LikesVar = new Mongo.Collection('likes');
 export default LikesVar;
+
+// export const LikesVar = new Mongo.Collection('likes');

@@ -3,9 +3,25 @@
 import { Template } from 'meteor/templating';
 
 import LikesVar from '../api/likes.js';
-// import '../imports/ui/jquery.js';
 
 import './body.html';
+
+// LOGIN
+Template.LoginModal.events({
+  'click.close-login': ()=> {
+    Session.set('nav-toggle', '');
+  },
+});
+
+Template.nav.events({
+  'click .login-toggle': () => {
+    Session.set('nav-toggle', 'open');
+  },
+
+  'click .logout': () => {
+    Meteor.logout();
+  },
+});
 
 // DISPLAY LIKES LIST
 Template.body.helpers({
@@ -13,6 +29,35 @@ Template.body.helpers({
     return LikesVar.find({}, { sort: { likeDate: -1 } });
   },
 });
+
+// Template.body.events({
+//   'keyup .searchbox': function (event) {
+//     console.log("search in progress");
+//     var query= event.target.value;
+//     console.log(query);
+//     sessionStorage.setItem('query',query);
+//       // return LikesVar.find({ likeName: new RegExp('^'+query+'$' , 'i')} );
+//   },
+// });
+
+// TEXT SEARCH ON MOPNGODB:
+// Template.search.events({
+//   'submit #search': function (e) {
+//     e.preventDefault();
+//     Session.set('searchValue', $('#searchValue').val());
+//   },
+// });
+//
+// Template.search.helpers({
+//   messages: function () {
+//     Meteor.subscribe('search', Session.get('searchValue'));
+//     if (Session.get('searchValue')) {
+//       return LikesVar.find({}, { sort: [['score', 'desc']] });
+//     } else {
+//       return LikesVar.find({});
+//     }
+//   },
+// });
 
 // COUNT NUMBER OF LIKES
 // Template.body.helpers({
@@ -83,34 +128,3 @@ Template.body.events({
     return false;
   },
 });
-
-// SEARCH LIKE
-// Template.contacts.helpers({
-// contacts:function(){
-// var filter ={sort: {}};
-// var query =Session.get('query');
-// filter.sort[Session.get('sortby')]=1;
-// return Contacts.find({name: new RegExp(query,'i'),user_id:Meteor.userId()},filter);
-//
-// }
-// });
-//
-// Template.navbar.events({
-//   'keyup .searchbox': function (event) {
-//     var query= event.target.value;
-//     console.log(query);
-    // Session.set('query',query);
-//   }
-// });
-
-
-// Template.contact.events({
-// "click .toggle-checked": function(){
-// var index=checked.indexOf(this._id);
-// if(index> -1){
-//   checked.splice(index,1);
-//                         }
-//    else{
-//    checked.push(this._id);
-//    }
-//

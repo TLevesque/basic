@@ -1,38 +1,34 @@
 <body>
 
 <!-- NAVBAR WITH LOGO & MODAL BUTTON TO ADD A LIKE & CONNECT BUTTON -->
-  <nav>
-    <div class="nav-wrapper #0d47a1 blue darken-4">
-    <!-- ADD A LIKE BUTTON TRIGGER MODAL WINDOW FORM -->
-      <ul class="left hide-on-med-and-down">
-        <li>
-          <a class="modal-trigger" href="#modalNewLike"><i class="material-icons left">add</i>Add New Like</a>
-        </li>
-      </ul>
+  <div class="navbar-fixed">
+    {{> nav}}
+  </div>
+  {{> LoginModal}}
 
-    <!-- LOGO -->
-      <a href="#!" class="brand-logo center">LikeBook</a>
-    <!-- USER CONNECT BUTTON -->
-      <ul class="right hide-on-med-and-down">
-        <li><a href="badges.html"><i class="material-icons right">perm_identity</i>Connect</a></li>
-      </ul>
-    </div>
-  </nav>
   {{> newLikeTemplate}}
 
 <!-- SEARCH BAR & RESULTS DIV-->
-  <div class="nav-wrapper">
-    <div class="search search-wrapper z-depth-2">
-      <form>
-        <div class="input-field">
-          <input class="searchbox" id="searchbox" type="search" required>
-          <label for="searchbox"><i class="material-icons">search</i></label>
-          <i class="material-icons">close</i>
-          <!-- <div class="search-results"></div> -->
-        </div>
-      </form>
-    </div>
-  </div>
+<!-- <div class="navbar-fixed"> -->
+  <!-- <nav> -->
+    <!-- <div class="nav-wrapper">
+      <div class="search search-wrapper z-depth-2">
+        <form>
+          <div class="input-field">
+            <input class="searchbox" id="searchbox" type="search" required>
+            <label for="searchbox"><i class="material-icons">search</i></label>
+            <i class="material-icons">close</i> -->
+            <!-- <div class="search-results"></div> -->
+          <!-- </div>
+        </form>
+      </div>
+    </div> -->
+  <!-- </nav> -->
+<!-- </div> -->
+
+<!-- SEARCH -->
+  <!-- {{> search}} -->
+
 
 <!-- LIKES COUNTER -->
   <!-- {{> likesCounterTemplate}} -->
@@ -40,14 +36,22 @@
 <!-- LIKES LIST -->
   <main>
     <div class="container">
+      {{#if currentUser}}
       <ul class="collection collapsible popout" data-collapsible="accordion">
         {{#each likesList}}
           {{> likeTemplate}}
           {{> updateLikeTemplate}}
         {{/each}}
       </ul>
+      {{else}}
+        <div class="container center">
+            <button class="btn login-toggle red" data-target="LoginModal">Please Login !</button>
+        </div>
+      {{/if}}
     </div>
   </main>
+
+<!-- {{loginButtons}} -->
 
   <script>
     $(document).ready(function () {
@@ -56,6 +60,46 @@
   </script>
 
 </body>
+
+<template name="nav">
+  <nav>
+    <!-- ADD A LIKE BUTTON TRIGGER MODAL WINDOW FORM -->
+    <div class="nav-wrapper #0d47a1 blue darken-4">
+      <ul class="left hide-on-med-and-down">
+        {{#if currentUser}}
+        <li>
+          <a class="modal-trigger" href="#modalNewLike"><i class="material-icons left">add</i>Add New Like</a>
+        </li>
+        {{/if}}
+      </ul>
+    <!-- LOGO -->
+      <a href="#!" class="brand-logo center">LikeBook</a>
+    <!-- USER CONNECT BUTTON -->
+      <ul class="right hide-on-med-and-down">
+        <li>
+          {{#if currentUser}}
+            <a class="logout" href=""><i class="material-icons right">perm_identity</i>Logout</a>
+          {{else}}
+            <a class="modal-trigger login-toggle" href="#LoginModal"><i class="material-icons right">perm_identity</i>Connect</a>
+          {{/if}}
+        </li>
+      </ul>
+    </div>
+  </nav>
+</template>
+<!-- <template name="search">
+  <form id="search">
+    <input type="text" id="searchValue" placeholder="Enter search terms here."/>
+    <button>Search</button>
+  </form>
+  <hr/>
+  <h1>Likes</h1>
+  <ol>
+    {{#each messages}}
+      <li>{{value}}</li>
+    {{/each}}
+  </ol>
+</template> -->
 
 <!-- <template name="likesCounterTemplate">
   <h5 class="center">You have {{likesNumber}} likes! ;)</h5>
@@ -164,6 +208,24 @@
                 </div>
               </div>
             </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<template name="LoginModal">
+
+  <div class="container">
+    <div class="modal" id="LoginModal">
+      <div class="modal-content">
+        <div class="container">
+          <div class="row">
+            <div class="login-modal {{$.Session.get 'nav-toggle'}}">
+              <i class="fa fa-close close-login"></i>
+              {{> atForm}}
+            </div>
           </div>
         </div>
       </div>
